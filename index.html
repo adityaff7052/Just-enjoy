@@ -95,18 +95,18 @@
             padding: 20px;
         }
         #reveal-image {
-            max-width: 90%; max-height: 65vh;
+            max-width: 90%; max-height: 60vh; /* Reduced slightly to create breathing space for mobile */
             border-radius: 10px; box-shadow: 0 0 30px rgba(46, 204, 113, 0.4);
             margin-bottom: 20px;
         }
 
-        /* Absolute bottom placement for the text line */
+        /* Adjusted: Raised the line higher so mobile screens safely see it */
         .credit-text {
             position: absolute;
-            bottom: 25px;
+            bottom: 65px; /* Moved up from 25px to clear mobile toolbars */
             left: 50%;
             transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.55); /* Light White */
+            color: rgba(255, 255, 255, 0.65); 
             font-size: 13.5px; 
             width: 90%;
             max-width: 500px;
@@ -236,6 +236,7 @@
         // --- AUDIO ENGINE LOGIC ---
         const audio1 = new Audio('click-sound.mp3');
         const audio2 = new Audio('click-sound2.mp3'); 
+        const audioLast = new Audio('last-sound.mp3'); // Added final sound object
 
         function playSound1() {
             audio1.currentTime = 0;
@@ -245,6 +246,11 @@
         function playSound2() {
             audio2.currentTime = 0;
             audio2.play().catch(e => { console.log("Audio 2 optimized."); });
+        }
+
+        function playLastSound() {
+            audioLast.currentTime = 0;
+            audioLast.play().catch(e => { console.log("Last Audio optimized."); });
         }
 
         function showToast() {
@@ -275,7 +281,7 @@
             el.style.top = randomY + 'px';
         }
 
-        // Cross button triggers layout changes and click sound 2
+        // Cross button triggers layouts and click sound 2
         mainCrossBtn.addEventListener('touchstart', (e) => {
             if (gameState === "loading") return;
             if (gameState === "marathon") {
@@ -299,7 +305,9 @@
         
         mainTickBtn.addEventListener('click', () => {
             if (gameState === "loading") return; 
-            playSound1();
+            if (gameState !== "revealPrompt") {
+                playSound1();
+            }
             if (gameState === "start") {
                 startMarathon();
             } else if (gameState === "twist") {
@@ -363,7 +371,7 @@
                 gameState = "twist";
                 swapCount = 0;
                 
-                // Clear active running positions to reset back inside standard popup
+                // Clear locations to reset neatly inside box
                 mainCrossBtn.classList.remove('teleporting');
                 mainCrossBtn.style.position = ''; mainCrossBtn.style.left = ''; mainCrossBtn.style.top = '';
                 
@@ -450,7 +458,6 @@
 
         // --- FINAL OUTCOME PRESENTATION PANELS ---
         function showRevealPrompt() {
-            // Remove tracking overrides on tick layout to center cleanly
             mainTickBtn.classList.remove('teleporting');
             mainTickBtn.style.position = ''; mainTickBtn.style.left = ''; mainTickBtn.style.top = '';
             
@@ -468,7 +475,7 @@
         });
 
         function revealFinalImage() {
-            playSound1();
+            playLastSound(); // Fires last-sound.mp3 on image reveal
             mainPopup.classList.add('hidden');
             finalContainer.classList.remove('hidden');
             document.title = "Gotcha!";
