@@ -1,4 +1,4 @@
-/* Core Variables - Apple Minimalist Dark Theme */
+/* Core Variables - Dark Mode Aesthetics */
 :root {
   --bg-dark: #030303;
   --bg-card: rgba(18, 18, 18, 0.75);
@@ -79,17 +79,18 @@ body {
 .brand-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   text-decoration: none;
   color: var(--text-main);
   font-weight: 600;
   font-size: 1.1rem;
 }
 
-.logo-icon {
-  width: 24px;
-  height: 24px;
-  color: var(--accent-green);
+.brand-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 .nav-links {
@@ -182,7 +183,7 @@ body {
 
 /* Canvas Scroll Track */
 .scroll-track {
-  height: 500vh; /* Scroll depth */
+  height: 500vh;
   position: relative;
 }
 
@@ -541,7 +542,7 @@ body {
   opacity: 1;
 }
 
-/* Thank You Section with Classic Fonts */
+/* Thank You Section */
 .thank-you-section {
   padding: 140px 24px;
   text-align: center;
@@ -592,7 +593,7 @@ body {
   font-size: 0.85rem;
 }
 
-/* Mobile Responsive Adjustments */
+/* Responsive Navigation Adjustments */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -606,4 +607,5 @@ body {
     width: 92%;
     bottom: 40px;
   }
-}
+    }
+  
