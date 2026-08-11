@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoEcho — Ecosystem Intelligence for a Greener Tomorrow</title>
+  <title>EcoEcho — Autonomous Ecosystem Intelligence</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Modern Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,22 +15,20 @@
   <nav class="navbar">
     <div class="logo">
       <span class="logo-badge"></span>
-      <span class="logo-text">ECOECHO <span class="logo-accent">/ NODE</span></span>
+      <span class="logo-text">ECOECHO <span class="logo-accent">/ SYSTEM</span></span>
     </div>
 
-    <!-- Mobile Hamburger Toggle Button -->
     <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation">
       <span></span>
       <span></span>
       <span></span>
     </button>
 
-    <!-- Navigation Menu (Sequential Flow) -->
     <ul class="nav-links" id="nav-menu">
       <li><a href="#home" class="nav-item active">HOME</a></li>
-      <li><a href="#product" class="nav-item">PRODUCT</a></li>
-      <li><a href="#service" class="nav-item">SERVICE</a></li>
-      <li><a href="#team" class="nav-item">TEAM MEMBERS</a></li>
+      <li><a href="#product" class="nav-item">SPECS</a></li>
+      <li><a href="#capabilities" class="nav-item">CAPABILITIES</a></li>
+      <li><a href="#team" class="nav-item">TEAM</a></li>
     </ul>
 
     <div class="nav-actions">
@@ -39,251 +36,231 @@
     </div>
   </nav>
 
-  <!-- 1. HOME SECTION -->
+  <!-- 1. HOME SECTION (360 Video Hero) -->
   <section class="hero-section" id="home">
     <div class="hero-container">
       
-      <!-- Hero Left: Content -->
       <div class="hero-left">
-        <div class="motto-tag">LISTEN <span class="dot">•</span> INTERPRET <span class="dot">•</span> ACT</div>
+        <div class="motto-tag">ACOUSTIC ML <span class="dot">•</span> LORA MESH <span class="dot">•</span> IP67</div>
         <h1 class="hero-title">
           EcoEcho<br>
-          <span class="highlight">Autonomous Node</span>
+          <span class="highlight">Acoustic Node</span>
         </h1>
         <p class="hero-desc">
-          Solar-powered TinyML audio intelligence node engineered with LoRa long-range telemetry for real-time acoustic sensing and immediate <span class="text-red">ecological alert dispatch</span>.
+          Solar-powered, autonomous edge intelligence node. continuous real-time audio sensing and encrypted long-range telemetry built for extreme wilderness habitats.
         </p>
 
         <div class="cta-wrapper">
-          <a href="#product" class="btn-primary">EXPLORE HARDWARE</a>
-          <a href="#service" class="btn-secondary">OUR SERVICES</a>
+          <a href="#product" class="btn-primary">EXPLORE ARCHITECTURE</a>
+          <a href="#capabilities" class="btn-secondary">SYSTEM CAPABILITIES</a>
         </div>
 
         <hr class="hero-divider">
 
-        <!-- Specs Highlight Row -->
         <div class="spec-highlights">
           <div class="spec-card">
-            <span class="spec-val text-red">TinyML Chip</span>
-            <span class="spec-label">On-Device AI</span>
+            <span class="spec-val">TinyML Core</span>
+            <span class="spec-label">On-Device Inference</span>
           </div>
           <div class="spec-card">
-            <span class="spec-val">LoRa Mesh</span>
-            <span class="spec-label">15km Offline Range</span>
+            <span class="spec-val">Sub-GHz LoRa</span>
+            <span class="spec-label">15km Wireless Link</span>
           </div>
           <div class="spec-card">
-            <span class="spec-val">20 × 18 cm</span>
-            <span class="spec-label">Rugged Chassis</span>
+            <span class="spec-val">IP67 Enclosure</span>
+            <span class="spec-label">Weatherproof Shell</span>
           </div>
         </div>
       </div>
 
-      <!-- Hero Right: Floating Product Photo -->
+      <!-- 360 Infinite Rotating Video Display -->
       <div class="hero-right">
-        <div class="image-wrapper">
-          <img src="head.jpg" alt="EcoEcho Hardware Node" class="product-hero-img">
-          <div class="floor-reflection"></div>
+        <div class="video-preview-wrapper">
+          <video class="hero-rotate-video" autoplay loop muted playsinline>
+            <source src="rotate.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="video-badge">360° LIVE ROTATION</div>
         </div>
       </div>
 
     </div>
 
-    <!-- Scroll Down Indicator -->
     <div class="scroll-indicator">
-      <span>SCROLL TO EXPLORE SPECS</span>
+      <span>SCROLL TO DISASSEMBLE &amp; INSPECT</span>
       <div class="mouse-icon"><div class="wheel"></div></div>
     </div>
   </section>
 
-  <!-- 2. PRODUCT SECTION (Interactive Frame Canvas) -->
+  <!-- 2. PRODUCT SECTION (Scrubbing Frame Canvas + Detailed Views) -->
   <div class="canvas-container" id="product">
     <canvas id="hero-canvas"></canvas>
 
-    <!-- Dynamic SVG Connector Lines -->
     <svg class="pointer-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-      <path id="line-solar" class="connector-line" d="M 50 28 L 26 20" />
-      <path id="line-lora" class="connector-line" d="M 52 38 L 74 30" />
-      <path id="line-tinyml" class="connector-line" d="M 46 48 L 24 48" />
-      <path id="line-mic" class="connector-line" d="M 58 54 L 76 58" />
-      <path id="line-speaker" class="connector-line" d="M 50 62 L 26 68" />
-      <path id="line-enclosure" class="connector-line" d="M 55 70 L 74 78" />
+      <path id="line-top" class="connector-line" d="M 50 30 L 26 22" />
+      <path id="line-antenna" class="connector-line" d="M 38 42 L 18 38" />
+      <path id="line-front" class="connector-line" d="M 50 52 L 76 45" />
+      <path id="line-back" class="connector-line" d="M 58 55 L 80 62" />
+      <path id="line-pcb" class="connector-line" d="M 48 45 L 22 46" />
+      <path id="line-mic" class="connector-line" d="M 68 58 L 82 54" />
     </svg>
 
-    <!-- Callout Glassmorphic Cards -->
-    <div class="overlay-card" id="overlay-solar">
-      <div class="card-icon">☀️</div>
+    <!-- Overlay Callout Cards (Driven by Video Stages) -->
+    <div class="overlay-card" id="overlay-top">
       <div class="card-content">
-        <h3>Solar Panel</h3>
-        <p>Continuous clean energy for <span class="text-red">24/7 autonomous runtime</span> in the field.</p>
+        <span class="card-tag">TOP VIEW</span>
+        <h3>Monocrystalline Solar Array</h3>
+        <p>Integrated top-facing photovoltaic panel providing uninterrupted self-charging capability under field sunlight conditions.</p>
       </div>
     </div>
 
-    <div class="overlay-card" id="overlay-lora">
-      <div class="card-icon">📡</div>
+    <div class="overlay-card" id="overlay-antenna">
       <div class="card-content">
-        <h3>LoRa Radio</h3>
-        <p>Long-range mesh communication for zero-cellular remote habitats.</p>
+        <span class="card-tag">SIDE VIEW</span>
+        <h3>Sub-GHz Antenna Interface</h3>
+        <p>External high-gain omnidirectional radio mast enabling up to 15km line-of-sight LoRa telemetry mesh connectivity.</p>
       </div>
     </div>
 
-    <div class="overlay-card" id="overlay-tinyml">
-      <div class="card-icon">🧠</div>
+    <div class="overlay-card" id="overlay-front">
       <div class="card-content">
-        <h3>TinyML Chip</h3>
-        <p>On-device species identification and real-time stress classification.</p>
+        <span class="card-tag">FRONT VIEW</span>
+        <h3>Rugged Snap-Latch Shell</h3>
+        <p>Reinforced ABS composite outer casing with impact-resistant dual clamps protecting internal electronics against moisture and shock.</p>
+      </div>
+    </div>
+
+    <div class="overlay-card" id="overlay-back">
+      <div class="card-content">
+        <span class="card-tag">REAR VIEW</span>
+        <h3>Sealed Gaskets &amp; Hinge Mounts</h3>
+        <p>Rear heavy-duty pivot hinges and weatherproof silicone seals designed for rapid tree trunk or post mounting.</p>
+      </div>
+    </div>
+
+    <div class="overlay-card" id="overlay-pcb">
+      <div class="card-content">
+        <span class="card-tag">INTERNAL VIEW</span>
+        <h3>TinyML Microcontroller Stack</h3>
+        <p>Dual-board stack featuring dedicated neural inference processing unit, flash storage, and low-power battery management controller.</p>
       </div>
     </div>
 
     <div class="overlay-card" id="overlay-mic">
-      <div class="card-icon">🎙️</div>
       <div class="card-content">
-        <h3>Microphone</h3>
-        <p>High-fidelity audio capture tuned for acoustic bio-monitoring.</p>
-      </div>
-    </div>
-
-    <div class="overlay-card" id="overlay-speaker">
-      <div class="card-badge">NEW FEATURE</div>
-      <div class="card-icon">🔊</div>
-      <div class="card-content">
-        <h3>Piezo Speaker</h3>
-        <p>Compact, low-power physical acoustic alerts triggered instantly in the field.</p>
-      </div>
-    </div>
-
-    <div class="overlay-card" id="overlay-enclosure">
-      <div class="card-icon">🛡️</div>
-      <div class="card-content">
-        <h3>Rugged Enclosure</h3>
-        <p>Weatherproof IP67 casing built for harsh wilderness habitats (20cm × 18cm).</p>
+        <span class="card-tag">ACOUSTIC SENSOR</span>
+        <h3>High-Fidelity Capsule Mic</h3>
+        <p>External acoustic windscreen capsule tuned for wild animal acoustics, chainsaw frequency identification, and environmental soundscapes.</p>
       </div>
     </div>
   </div>
 
-  <!-- Scroll Track Buffer for Canvas Scrubbing -->
   <div class="scroll-track"></div>
 
-  <!-- 3. SERVICE SECTION (Bento Grid) -->
-  <section class="features-section" id="service">
+  <!-- 3. CAPABILITIES SECTION (Monochrome Bento Grid) -->
+  <section class="features-section" id="capabilities">
     <div class="section-header">
-      <span class="sub-heading">ECOSYSTEM CAPABILITIES</span>
-      <h2>What <span class="text-red">EcoEcho</span> Enables</h2>
-      <p>A small add-on. A huge difference — from sensing to sounding the alert to saving biodiversity.</p>
+      <span class="sub-heading">SYSTEM ARCHITECTURE</span>
+      <h2>Designed for <span class="text-contrast">Uncompromising Field Reliability</span></h2>
+      <p>A completely self-contained biological monitoring station running on-device artificial intelligence.</p>
     </div>
 
     <div class="bento-grid">
       <div class="bento-card span-2">
-        <div class="bento-icon text-red">🚨</div>
-        <h3>Real-time Physical Alerts</h3>
-        <p>Instant light and sound signals emitted directly from field nodes upon detecting critical acoustic triggers like illegal logging or wildlife stress calls.</p>
+        <span class="bento-num">01</span>
+        <h3>On-Device Edge Inference</h3>
+        <p>Acoustic classification models execute directly on the node microcontroller without requiring cloud or cellular connectivity.</p>
       </div>
 
       <div class="bento-card">
-        <div class="bento-icon text-red">📈</div>
-        <h3>Early Warning AI</h3>
-        <p>Predictive ecological stress detection running locally on low-power TinyML models.</p>
+        <span class="bento-num">02</span>
+        <h3>15km Mesh Relay</h3>
+        <p>Sub-GHz LoRa radio protocols relay critical alert payloads across node chains to remote ranger stations.</p>
       </div>
 
       <div class="bento-card">
-        <div class="bento-icon text-red">🌐</div>
-        <h3>100% Offline Mesh</h3>
-        <p>Operates autonomously in zero-cellular wilderness environments via encrypted LoRa mesh nodes.</p>
+        <span class="bento-num">03</span>
+        <h3>Zero-Maintenance Power</h3>
+        <p>Optimized energy harvester recharges internal LiFePO4 cells continuously via the integrated top solar panel.</p>
       </div>
 
       <div class="bento-card span-2">
-        <div class="bento-icon text-red">🛠️</div>
-        <h3>Zero New Fieldwork Required</h3>
-        <p>Designed as an affordable plug-and-play upgrade to existing environmental monitoring infrastructure without replacing existing assets.</p>
+        <span class="bento-num">04</span>
+        <h3>IP67 Weather Resistance</h3>
+        <p>Dual rubber gasket seals ensure reliable performance in dense tropical rain, freezing dust storms, and extreme humidity.</p>
       </div>
     </div>
   </section>
 
-  <!-- 4. TEAM MEMBERS SECTION -->
+  <!-- 4. TEAM SECTION (Compact Cards) -->
   <section class="team-section" id="team">
     <div class="section-header">
-      <span class="sub-heading">THE BUILDERS</span>
-      <h2>Product Team & <span class="text-red">Innovators</span></h2>
-      <p>Engineers, researchers, and designers building the future of acoustic bio-intelligence.</p>
+      <span class="sub-heading">PROJECT BUILDERS</span>
+      <h2>Engineering &amp; Research</h2>
+      <p>The team behind the EcoEcho acoustic intelligence hardware.</p>
     </div>
 
     <div class="team-grid">
-      <!-- Member 1 -->
       <div class="team-card">
         <div class="member-img-frame">
-          <img src="member1.jpg" alt="Member 1" class="member-photo">
-          <div class="connecting-dot"></div>
+          <img src="member1.jpg" alt="Team Member 1" class="member-photo">
         </div>
         <div class="member-info">
           <h3>Member 1</h3>
-          <span class="member-role text-red">Project Lead & Speaker</span>
-          <p>Drives strategic partnerships, deployments, and global climate challenge presentations.</p>
+          <span class="member-role">Project Lead &amp; Strategy</span>
         </div>
       </div>
 
-      <!-- Member 2 -->
       <div class="team-card">
         <div class="member-img-frame">
-          <img src="member2.jpg" alt="Member 2" class="member-photo">
-          <div class="connecting-dot"></div>
+          <img src="member2.jpg" alt="Team Member 2" class="member-photo">
         </div>
         <div class="member-info">
           <h3>Member 2</h3>
-          <span class="member-role text-red">Industrial Hardware Designer</span>
-          <p>Architect of the IP67 rugged enclosure and solar thermal-aware chassis architecture.</p>
+          <span class="member-role">Industrial Design</span>
         </div>
       </div>
 
-      <!-- Member 3 -->
       <div class="team-card">
         <div class="member-img-frame">
-          <img src="member3.jpg" alt="Member 3" class="member-photo">
-          <div class="connecting-dot"></div>
+          <img src="member3.jpg" alt="Team Member 3" class="member-photo">
         </div>
         <div class="member-info">
           <h3>Member 3</h3>
-          <span class="member-role text-red">TinyML & AI Researcher</span>
-          <p>Trains low-latency neural acoustic models for real-time edge species classification.</p>
+          <span class="member-role">TinyML &amp; AI Engineering</span>
         </div>
       </div>
 
-      <!-- Member 4 -->
       <div class="team-card">
         <div class="member-img-frame">
-          <img src="member4.jpg" alt="Member 4" class="member-photo">
-          <div class="connecting-dot"></div>
+          <img src="member4.jpg" alt="Team Member 4" class="member-photo">
         </div>
         <div class="member-info">
           <h3>Member 4</h3>
-          <span class="member-role text-red">Embedded Firmware Engineer</span>
-          <p>Develops ultra-low power management and offline LoRa mesh protocol stacks.</p>
+          <span class="member-role">Embedded Firmware Systems</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 5. THANK YOU / OUTRO SECTION (Full-screen 100vh) -->
+  <!-- 5. OUTRO SECTION -->
   <section class="outro-section" id="contact">
     <div class="outro-content">
-      <span class="outro-tag">OXFORD GLOBAL CLIMATE TECH CHALLENGE 2026</span>
-      <h2>
-        Thank You for Exploring <span class="text-red">EcoEcho</span>
-      </h2>
-      <p>
-        From sensing <span class="text-red">&rarr;</span> to sounding the alert <span class="text-red">&rarr;</span> to <span class="text-red">saving biodiversity</span>.
-      </p>
+      <span class="outro-tag">GLOBAL CLIMATE TECH CHALLENGE 2026</span>
+      <h2>EcoEcho Hardware Node</h2>
+      <p>Continuous edge bio-monitoring for wilderness ecosystems.</p>
 
       <div class="outro-actions">
-        <a href="mailto:contact@ecoecho.tech" class="btn-primary-red">GET IN TOUCH</a>
-        <a href="#" class="btn-secondary-white">DOWNLOAD DATASHEET (PDF)</a>
+        <a href="mailto:contact@ecoecho.tech" class="btn-primary">GET IN TOUCH</a>
+        <a href="#" class="btn-secondary">TECHNICAL DATASHEET</a>
       </div>
     </div>
 
-    <!-- Giant Watermark Footer Branding -->
     <div class="giant-footer-text">ECOECHO</div>
 
     <div class="footer-bottom">
-      <span>&copy; 2026 EcoEcho Hardware Project. All rights reserved.</span>
-      <span>Oxford Climate Tech Entry</span>
+      <span>&copy; 2026 EcoEcho Systems. All rights reserved.</span>
+      <span>Acoustic Edge Intelligence</span>
     </div>
   </section>
 
