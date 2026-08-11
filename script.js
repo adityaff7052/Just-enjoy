@@ -2,7 +2,7 @@
 const canvas = document.getElementById("hero-canvas");
 const context = canvas.getContext("2d");
 
-const TOTAL_FRAMES = 240;
+const TOTAL_FRAMES = 240; // Set to your frame count
 const currentFrame = (index) => `./frames/frame (${index}).webp`;
 
 const images = [];
@@ -15,7 +15,7 @@ for (let i = 1; i <= TOTAL_FRAMES; i++) {
   images.push(img);
 }
 
-// Canvas Resize & Dynamic Mobile Offset Handler
+// Canvas Resize Handler
 function setCanvasSize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -24,7 +24,7 @@ function setCanvasSize() {
 
 window.addEventListener("resize", setCanvasSize);
 
-// Render Current Frame with Device-Aware Positioning
+// Render Current Frame with Cover Scaling
 function renderFrame() {
   const img = images[frameState.frame - 1];
   if (!img || !img.complete) return;
@@ -33,17 +33,10 @@ function renderFrame() {
 
   const hRatio = canvas.width / img.width;
   const vRatio = canvas.height / img.height;
-  
-  // Choose scale factor
-  const isMobile = window.innerWidth <= 768;
-  const ratio = Math.max(hRatio, vRatio) * (isMobile ? 0.85 : 1.0);
+  const ratio = Math.max(hRatio, vRatio);
 
   const centerShift_x = (canvas.width - img.width * ratio) / 2;
-  
-  // On mobile, push the model up to the top 65% so the bottom card never overlaps
-  const centerShift_y = isMobile
-    ? (canvas.height * 0.40) - (img.height * ratio / 2)
-    : (canvas.height - img.height * ratio) / 2;
+  const centerShift_y = (canvas.height - img.height * ratio) / 2;
 
   context.drawImage(
     img,
@@ -58,7 +51,7 @@ function renderFrame() {
   );
 }
 
-// Initial Render on First Image Load
+// Ensure First Image Renders When Loaded
 images[0].onload = () => {
   setCanvasSize();
 };
@@ -83,7 +76,7 @@ window.addEventListener("scroll", () => {
   frameState.frame = frameIndex;
   requestAnimationFrame(renderFrame);
 
-  // Toggle Overlay Cards Based on Scroll Depth
+  // Toggle Overlay Cards Based on Progress Depth
   toggleCard("overlay-top", progress > 0.05 && progress < 0.20);
   toggleCard("overlay-antenna", progress >= 0.20 && progress < 0.35);
   toggleCard("overlay-front", progress >= 0.35 && progress < 0.50);
@@ -103,7 +96,7 @@ function toggleCard(id, isActive) {
   }
 }
 
-// Specs Button Smooth Scroll Navigation
+// Specs Button Smooth Scroll Navigation (Fix requirement #2)
 function scrollToScroller(e) {
   e.preventDefault();
   const target = document.getElementById("scroller");
@@ -114,4 +107,3 @@ function scrollToScroller(e) {
 
 document.getElementById("nav-specs-btn")?.addEventListener("click", scrollToScroller);
 document.getElementById("hero-specs-btn")?.addEventListener("click", scrollToScroller);
-             
