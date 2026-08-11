@@ -2,7 +2,7 @@
 const canvas = document.getElementById("hero-canvas");
 const context = canvas.getContext("2d");
 
-const TOTAL_FRAMES = 240; // Set to your frame count
+const TOTAL_FRAMES = 240;
 const currentFrame = (index) => `./frames/frame (${index}).webp`;
 
 const images = [];
@@ -96,7 +96,7 @@ function toggleCard(id, isActive) {
   }
 }
 
-// Specs Button Smooth Scroll Navigation (Fix requirement #2)
+// Specs Button Smooth Scroll Navigation
 function scrollToScroller(e) {
   e.preventDefault();
   const target = document.getElementById("scroller");
