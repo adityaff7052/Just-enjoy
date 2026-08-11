@@ -1,127 +1,117 @@
+// Setup Canvas & Frame Sequence Variables
 const canvas = document.getElementById("hero-canvas");
 const context = canvas.getContext("2d");
 
-// Native rendering resolution
-canvas.width = 1920;
-canvas.height = 1080;
-
 const TOTAL_FRAMES = 240;
-const images = [];
+const currentFrame = (index) => `./frames/frame (${index}).webp`;
 
-// Preload 240 frame sequence images from frames/ folder
+const images = [];
+const frameState = { frame: 1 };
+
+// Preload Sequence Images
 for (let i = 1; i <= TOTAL_FRAMES; i++) {
   const img = new Image();
-  img.src = `./frames/frame (${i}).webp`;
+  img.src = currentFrame(i);
   images.push(img);
 }
 
-// Initial frame render
+// Canvas Resize & Dynamic Mobile Offset Handler
+function setCanvasSize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  renderFrame();
+}
+
+window.addEventListener("resize", setCanvasSize);
+
+// Render Current Frame with Device-Aware Positioning
+function renderFrame() {
+  const img = images[frameState.frame - 1];
+  if (!img || !img.complete) return;
+
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  const hRatio = canvas.width / img.width;
+  const vRatio = canvas.height / img.height;
+  
+  // Choose scale factor
+  const isMobile = window.innerWidth <= 768;
+  const ratio = Math.max(hRatio, vRatio) * (isMobile ? 0.85 : 1.0);
+
+  const centerShift_x = (canvas.width - img.width * ratio) / 2;
+  
+  // On mobile, push the model up to the top 65% so the bottom card never overlaps
+  const centerShift_y = isMobile
+    ? (canvas.height * 0.40) - (img.height * ratio / 2)
+    : (canvas.height - img.height * ratio) / 2;
+
+  context.drawImage(
+    img,
+    0,
+    0,
+    img.width,
+    img.height,
+    centerShift_x,
+    centerShift_y,
+    img.width * ratio,
+    img.height * ratio
+  );
+}
+
+// Initial Render on First Image Load
 images[0].onload = () => {
-  drawFrame(0);
+  setCanvasSize();
 };
 
-let targetFrame = 0;
-let currentFrame = 0;
+// Scroll Controller for Canvas Frame Scrubbing and Cards
+const scrollTrack = document.getElementById("scroller");
 
-// Scroll listener for frame scrubbing & overlay stages
 window.addEventListener("scroll", () => {
-  const heroSection = document.querySelector(".hero-section");
-  const heroHeight = heroSection ? heroSection.offsetHeight : window.innerHeight;
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const trackRect = scrollTrack.getBoundingClientRect();
+  const trackHeight = scrollTrack.offsetHeight - window.innerHeight;
+  
+  // Calculate progress inside scroller section (0.0 to 1.0)
+  let progress = -trackRect.top / trackHeight;
+  progress = Math.max(0, Math.min(1, progress));
 
-  const animationScrollTop = Math.max(0, scrollTop - heroHeight);
-  const totalAnimatableHeight = document.querySelector(".scroll-track").offsetHeight;
+  // Update Frame Index
+  const frameIndex = Math.min(
+    TOTAL_FRAMES,
+    Math.max(1, Math.floor(progress * TOTAL_FRAMES))
+  );
 
-  let scrollFraction = 0;
-  if (totalAnimatableHeight > 0) {
-    scrollFraction = Math.min(1, Math.max(0, animationScrollTop / totalAnimatableHeight));
-  }
+  frameState.frame = frameIndex;
+  requestAnimationFrame(renderFrame);
 
-  targetFrame = Math.floor(scrollFraction * (TOTAL_FRAMES - 1));
-
-  const canvasContainer = document.querySelector(".canvas-container");
-  if (canvasContainer) {
-    if (scrollTop < heroHeight * 0.3 || scrollFraction >= 0.98) {
-      canvasContainer.style.opacity = "0";
-    } else {
-      canvasContainer.style.opacity = "1";
-    }
-  }
-
-  // Display overlay cards based on video timeline views
-  toggleOverlay("overlay-top", "line-top", scrollFraction > 0.02 && scrollFraction < 0.16);
-  toggleOverlay("overlay-antenna", "line-antenna", scrollFraction > 0.18 && scrollFraction < 0.32);
-  toggleOverlay("overlay-front", "line-front", scrollFraction > 0.34 && scrollFraction < 0.48);
-  toggleOverlay("overlay-back", "line-back", scrollFraction > 0.50 && scrollFraction < 0.64);
-  toggleOverlay("overlay-pcb", "line-pcb", scrollFraction > 0.66 && scrollFraction < 0.82);
-  toggleOverlay("overlay-mic", "line-mic", scrollFraction > 0.84 && scrollFraction < 0.96);
-
-  updateActiveNavLink();
+  // Toggle Overlay Cards Based on Scroll Depth
+  toggleCard("overlay-top", progress > 0.05 && progress < 0.20);
+  toggleCard("overlay-antenna", progress >= 0.20 && progress < 0.35);
+  toggleCard("overlay-front", progress >= 0.35 && progress < 0.50);
+  toggleCard("overlay-back", progress >= 0.50 && progress < 0.65);
+  toggleCard("overlay-pcb", progress >= 0.65 && progress < 0.80);
+  toggleCard("overlay-mic", progress >= 0.80 && progress < 0.95);
 });
 
-function toggleOverlay(cardId, lineId, showCondition) {
-  const card = document.getElementById(cardId);
-  const line = document.getElementById(lineId);
-
+function toggleCard(id, isActive) {
+  const card = document.getElementById(id);
   if (card) {
-    card.style.opacity = showCondition ? "1" : "0";
-    card.style.transform = showCondition ? "translateY(0)" : "translateY(10px)";
-  }
-
-  if (line) {
-    line.style.opacity = showCondition ? "1" : "0";
-  }
-}
-
-function drawFrame(index) {
-  if (images[index] && images[index].complete) {
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(images[index], 0, 0, canvas.width, canvas.height);
-  }
-}
-
-function render() {
-  currentFrame += (targetFrame - currentFrame) * 0.12;
-  const frameToDraw = Math.round(currentFrame);
-
-  drawFrame(frameToDraw);
-  requestAnimationFrame(render);
-}
-
-requestAnimationFrame(render);
-
-function updateActiveNavLink() {
-  const sections = document.querySelectorAll("section, .canvas-container");
-  const navLinks = document.querySelectorAll(".nav-item");
-
-  let currentSection = "";
-  sections.forEach((section) => {
-    const sectionTop = section.offsetTop - 120;
-    if (window.scrollY >= sectionTop) {
-      currentSection = section.getAttribute("id");
+    if (isActive) {
+      card.classList.add("active");
+    } else {
+      card.classList.remove("active");
     }
-  });
-
-  navLinks.forEach((link) => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === `#${currentSection}`) {
-      link.classList.add("active");
-    }
-  });
+  }
 }
 
-// Mobile Menu Toggle
-const hamburgerBtn = document.getElementById("hamburger-btn");
-const navMenu = document.getElementById("nav-menu");
-
-if (hamburgerBtn && navMenu) {
-  hamburgerBtn.addEventListener("click", () => {
-    navMenu.classList.toggle("active");
-  });
-
-  document.querySelectorAll(".nav-item").forEach((link) => {
-    link.addEventListener("click", () => {
-      navMenu.classList.remove("active");
-    });
-  });
+// Specs Button Smooth Scroll Navigation
+function scrollToScroller(e) {
+  e.preventDefault();
+  const target = document.getElementById("scroller");
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth" });
+  }
 }
+
+document.getElementById("nav-specs-btn")?.addEventListener("click", scrollToScroller);
+document.getElementById("hero-specs-btn")?.addEventListener("click", scrollToScroller);
+             
